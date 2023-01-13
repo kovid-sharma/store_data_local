@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:store_data_local/Model/User.dart';
 import 'package:store_data_local/Pages/showdet.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_flutter/adapters.dart';
 class filldetails extends StatefulWidget {
   final String Nameofuser;
   filldetails({required Key key, required this.Nameofuser}) : super(key: key);
@@ -84,25 +85,21 @@ class _filldetailsState extends State<filldetails> {
             Center(
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.green),
+                  backgroundColor: MaterialStateProperty.all(Colors.black),
                 ),
                 onPressed: ()async
                 {
-                  User update= User(title: something);
-                  update.age= ageCnt.text;
-                  update.gender=genderCnt.text;
-                  update.id=records.get(something).id;
-                  update.body=records.get(something).body;
-                  await records.put(something,update);
+                  print(ageCnt.text);
+                  String storage= something+'#'+ageCnt.text+'#'+genderCnt.text;
+                  await records.put(something,storage);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => showdet(Nameofuser: something,key: Key('Kovid'),),
-                      ));
+                        builder: (context) => showdet(Nameofuser: something,key: Key('KOVID'),),
+                      )
+                  );
                 },
-                child: Text('Submit'
-
-                ),
+                child: Text('Submit'),
               ),
             )
           ],

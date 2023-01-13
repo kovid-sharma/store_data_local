@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import '../Model/User.dart';
@@ -15,9 +17,28 @@ class _showdetState extends State<showdet> {
 
   @override
   Widget build(BuildContext context) {
-    Box? records = Hive.box("mibox");
-    String? ageF= records?.get(something).age;
-    String? genderF=records?.get(something).gender;
+    Box records = Hive.box("mibox");
+    String xx= records.get(something);
+    int i=0;
+    while(i<xx.length && xx[i]!='#')
+      {
+        i++;
+      }
+
+      i++;
+    String ageF='';
+    while(i<xx.length && xx[i]!='#')
+    {
+      ageF+=xx[i];
+      i++;
+    }
+    i++;
+    String genderF='';
+    while(i<xx.length)
+    {
+      genderF+=xx[i];
+      i++;
+    }
     return Scaffold(
       appBar: AppBar(
         title: Text('KOVID SHARMA Details show'),

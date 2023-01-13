@@ -43,7 +43,7 @@ class _ListPageState extends State<ListPage> {
                     itemCount: listOfData.length,
 
                     itemBuilder: (context, index) {
-                      final isSignIn= box.get(listOfData[index].title)=='KOVID';
+                      final isSignIn= box.get(listOfData[index].title)!=null;
                       return ListTile(
 
                         title: Text(listOfData[index].title.toString()),
@@ -64,7 +64,8 @@ class _ListPageState extends State<ListPage> {
                         ):
                         ElevatedButton(//signin button
                           onPressed: () async {
-                            await box.put(listOfData[index].title, listOfData[index]);
+                            String? storage= listOfData[index].title+'#'+listOfData[index].age+'#'+listOfData[index].gender;
+                            await box.put(listOfData[index].title, storage);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -82,17 +83,19 @@ class _ListPageState extends State<ListPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => showdet(Nameofuser: listOfData[index].title,key: Key('Kovid'),),
+                                    builder: (context) => showdet(Nameofuser: listOfData[index].title,key: Key('KOVID'),),
                                   ));
                             }
                           else   //signin button put as well
-                            {
+
+                          {
+                            await box.put(listOfData[index].title, true);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => filldetails(Nameofuser: listOfData[index].title,key: Key('Kovid'),),
+                                    builder: (context) => filldetails(Nameofuser: listOfData[index].title,key: Key('KOVID'),),
                                   ));
-                              await box.put(listOfData[index].title, listOfData[index]);
+
                             }
                         },
                       );

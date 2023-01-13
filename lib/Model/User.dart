@@ -3,8 +3,8 @@ class User{
   String? id;
   String title='KOVID';
   String? body;
-  String? age='0';
-  String? gender='M';
+  String age='0';
+  String gender='M';
   User({
     this.id,
     required this.title,
